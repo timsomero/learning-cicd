@@ -1,10 +1,16 @@
-﻿namespace HelloApi.Tests;
-
-public class UnitTest1
+﻿public class HelloEndpointTests
 {
     [Fact]
-    public void Test1()
+    public void Message_ShouldNotBeEmpty()
     {
+        var result = new { message = "Hello, World!", timestamp = DateTime.UtcNow };
+        Assert.False(string.IsNullOrEmpty(result.message));
+    }
 
+    [Fact]
+    public void Timestamp_ShouldBeRecentUtc()
+    {
+        var result = new { message = "Hello, World!", timestamp = DateTime.UtcNow };
+        Assert.True(result.timestamp > DateTime.UtcNow.AddMinutes(-1));
     }
 }
